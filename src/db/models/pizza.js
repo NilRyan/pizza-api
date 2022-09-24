@@ -8,5 +8,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
+    number: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
   });
 };

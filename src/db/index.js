@@ -22,6 +22,7 @@ const modelDefiners = [
   require('./models/pizzaSize'),
   require('./models/pizzaToppings'),
   require('./models/pizzaType'),
+  require('./models/toppingsPizzaArea'),
 ];
 
 for (const modelDefiner of modelDefiners) {
