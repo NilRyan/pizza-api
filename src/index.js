@@ -5,7 +5,7 @@ const port = process.env.PORT || 3001;
 
 async function assertDatabaseConnectionOk() {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     await sequelize.authenticate();
     /* eslint-disable no-console */
     console.log('Database connection OK!');
