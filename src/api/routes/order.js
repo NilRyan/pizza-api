@@ -30,17 +30,20 @@ function mapper(response) {
     orderNumber: order.id,
     pizzas: order.pizzas.map((pizza) => {
       const toppings = [];
-      for (let index = 0; index < 3; index++) {
-        const items = pizza.pizza_toppings
-          .filter(
-            ({ toppings_pizza_area }) => toppings_pizza_area.area === index,
-          )
-          .map(({ topping }) => topping);
-        toppings.push({
-          area: index,
-          items,
-        });
+      if (pizza.pizza_type.type === 'custom') {
+        for (let index = 0; index < 3; index++) {
+          const items = pizza.pizza_toppings
+            .filter(
+              ({ toppings_pizza_area }) => toppings_pizza_area.area === index,
+            )
+            .map(({ topping }) => topping);
+          toppings.push({
+            area: index,
+            items,
+          });
+        }
       }
+
       return {
         number: pizza.number,
         crust: pizza.pizza_crust.crust,

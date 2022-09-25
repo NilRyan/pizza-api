@@ -17,7 +17,7 @@ function parseOrders(pml) {
   const orderNumber = Number(match[1]);
   validateNumber(orderNumber);
   return {
-    orderNumber: orderNumber,
+    orderNumber,
     pizzas: match[2],
   };
 }
@@ -36,7 +36,7 @@ function parsePizzas(pizzas) {
   const pizzaJson = pizzaDetailsList.map(({ pizzaNumber, pizzaDetails }) => {
     const pizzaElements = parsePizzaElements(pizzaDetails);
     let toppings = [];
-    if (pizzaElements.type === "custom") {
+    if (pizzaElements.type === 'custom') {
       toppings = parseToppings(pizzaDetails);
     }
     return {
@@ -52,8 +52,7 @@ function parsePizzas(pizzas) {
 }
 
 function parsePizzaElements(pizza) {
-  const pizzaElementsRegex =
-    /{size}(.+?){\\size}\s*{crust}(.+?){\\crust}\s*{type}(.+?){\\type}/m;
+  const pizzaElementsRegex = /{size}(.+?){\\size}\s*{crust}(.+?){\\crust}\s*{type}(.+?){\\type}/m;
   const match = pizza.match(pizzaElementsRegex);
   validateMatch(match);
   return {
@@ -64,9 +63,8 @@ function parsePizzaElements(pizza) {
 }
 
 function parseToppings(pizza) {
-  const pizzaElementsRegex =
-    /{size}(.*?){\\size}\s*{crust}(.*?){\\crust}\s*{type}(.*?){\\type}/m;
-  const toppingsDetails = pizza.replace(pizzaElementsRegex, "");
+  const pizzaElementsRegex = /{size}(.*?){\\size}\s*{crust}(.*?){\\crust}\s*{type}(.*?){\\type}/m;
+  const toppingsDetails = pizza.replace(pizzaElementsRegex, '');
   const toppingsRegex = /{toppings area="(.+?)"}(.+?){\\toppings}/gms;
   const itemsRegex = /{item}(.+?){\\item}/gms;
   const toppingsList = [];
@@ -90,26 +88,26 @@ function parseToppings(pizza) {
 
 function validateNumber(number) {
   if (Number.isNaN(number)) {
-    throw new Error("Attribute must be a valid number");
+    throw new Error('Attribute must be a valid number');
   }
 }
 
 function validateMatch(match) {
   if (match === null) {
-    throw new Error("Invalid PML Syntax");
+    throw new Error('Invalid PML Syntax');
   }
 }
 
 function validatePizzaTotal(pizzaJson) {
   if (pizzaJson.length > 24) {
-    throw new Error("Total number of Pizza cannot exceed 24!");
+    throw new Error('Total number of Pizza cannot exceed 24!');
   }
 }
 
 function validatePizzaNumbering(pizzaJson) {
   for (let index = 1; index <= pizzaJson.length; index++) {
     if (index !== pizzaJson[index - 1].pizzaNumber) {
-      throw new Error("Please check Pizza numbering");
+      throw new Error('Please check Pizza numbering');
     }
   }
 }
@@ -118,7 +116,7 @@ function validateAreaNumbering(toppings) {
   for (let index = 0; index < 3; index++) {
     if (index !== toppings[index].area) {
       throw new Error(
-        "Please check toppings area numbering. Must be order from 0 to 2"
+        'Please check toppings area numbering. Must be order from 0 to 2',
       );
     }
   }

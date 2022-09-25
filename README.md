@@ -1,23 +1,13 @@
+## Dependencies
+ExpressJS with PostgreSQL using Sequelize ORM
 ## Setup
-
 ```
 npm install
 ```
-
-## Lint
-
-```
-npm run lint
-```
-
-## Test
+## Running Locally
+By default PORT is 3002.
 
 ```
-npm test
-```
-
-## Development
-
-```
-npm run dev
+docker-compose-up
+npm run start
 ```
