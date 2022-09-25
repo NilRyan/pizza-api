@@ -21,7 +21,36 @@ router.post('/', async ({ body }, res, next) => {
 });
 
 router.get('/', async (req, res) => {
-  res.json(await getAllOrders.execute());
+  const response = await getAllOrders.execute();
+  res.json(mapper(response));
 });
+
+function mapper(response) {
+  return response.map((order) => ({
+    orderNumber: order.id,
+    pizzas: order.pizzas.map((pizza) => {
+      const toppings = [];
+      for (let index = 0; index < 3; index++) {
+        const items = pizza.pizza_toppings
+          .filter(
+            ({ toppings_pizza_area }) => toppings_pizza_area.area === index,
+          )
+          .map(({ topping }) => topping);
+        toppings.push({
+          area: index,
+          items,
+        });
+      }
+      return {
+        number: pizza.number,
+        crust: pizza.pizza_crust.crust,
+        size: pizza.pizza_size.size,
+        type: pizza.pizza_type.type,
+        toppings,
+        toppingsTotal: pizza.pizza_toppings.length,
+      };
+    }),
+  }));
+}
 
 module.exports = router;
