@@ -1,4 +1,14 @@
 /* eslint-disable no-restricted-syntax */
+function parseToJson(body) {
+  const { orderNumber, pizzas } = parseOrders(body);
+  const pizzaJson = parsePizzas(pizzas);
+
+  return {
+    orderNumber,
+    pizzas: pizzaJson,
+  };
+}
+
 function parseOrders(pml) {
   const orderNumberRegex = /^{order number="(.+?)"}(.+?){\\order}$/ms;
   const match = pml.match(orderNumberRegex);
@@ -107,12 +117,13 @@ function validatePizzaNumbering(pizzaJson) {
 function validateAreaNumbering(toppings) {
   for (let index = 0; index < 3; index++) {
     if (index !== toppings[index].area) {
-      throw new Error("Please check toppings area numbering. Must be order from 0 to 2");
+      throw new Error(
+        "Please check toppings area numbering. Must be order from 0 to 2"
+      );
     }
   }
 }
 
 module.exports = {
-  parseOrders,
-  parsePizzas,
+  parseToJson,
 };
