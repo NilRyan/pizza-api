@@ -11,8 +11,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   port: dbConfig.PORT,
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  logQueryParameters: true,
   benchmark: true,
+  logging: false,
 });
 
 const modelDefiners = [
