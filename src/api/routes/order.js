@@ -31,6 +31,7 @@ function mapper(response) {
     pizzas: order.pizzas.map((pizza) => {
       const toppings = [];
       if (pizza.pizza_type.type === 'custom') {
+        console.log(pizza.pizza_toppings)
         for (let index = 0; index < 3; index++) {
           const items = pizza.pizza_toppings
             .filter(

@@ -20,7 +20,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.23.1"
+    "sequelize": "^6.23.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "eslint": "^8.22.0",

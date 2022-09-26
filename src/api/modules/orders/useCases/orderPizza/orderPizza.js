@@ -1,3 +1,4 @@
+const { uuid } = require('uuidv4');
 const { models } = require('../../../../../db');
 
 async function execute(parsedPml) {
@@ -47,6 +48,7 @@ async function execute(parsedPml) {
           });
 
           await models.toppings_pizza_area.create({
+            id: uuid(),
             area,
             pizzaId: pizzaModel.getDataValue('id'),
             pizzaToppingId: toppings.getDataValue('id'),
