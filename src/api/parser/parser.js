@@ -76,6 +76,7 @@ function parseToppings(pizza) {
       items.push(matchItem[1]);
     }
     const areaNumber = Number(area);
+    validateToppingsItemsTotal(items);
     validateNumber(areaNumber);
     toppingsList.push({
       area: areaNumber,
@@ -84,6 +85,12 @@ function parseToppings(pizza) {
   }
   validateAreaNumbering(toppingsList);
   return toppingsList;
+}
+
+function validateToppingsItemsTotal(items) {
+  if (items.length > 12) {
+    throw new Error('Toppings must not exceed 12 items.');
+  }
 }
 
 function validateNumber(number) {
